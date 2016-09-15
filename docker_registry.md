@@ -19,14 +19,16 @@ mkdir -p /app/docker/images
 Proper signeed certificate
 ```sh
 cd /app/docker/certs
-# generate key (without -des3 for no pass phrase)
-openssl genrsa -des3 2048 > server.key
+# generate key (-des3 for passphrase)
+openssl genrsa 2048 > server.key
 # generate signing request (CN must be a FQDN of your server)
 openssl req -new -key server.key -out server.csr
 ```
-You may sign the certificate by yourself using following command, but then you have to copy server.crt file to /etc/docker/certs.d/YOUR_FQDN:5000/ca.crt for every deamon
+You may sign the certificate by yourself using following command, but then you have to copy ```server.crt``` file to ```/etc/docker/certs.d/YOUR_FQDN:5000/ca.crt``` for every deamon
 ```sh
 openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+# on client where DockerRegistry is FQDN of registry server
+scp docker@DockerRegistry:/app/docker/certs/*crt /etc/docker/certs.d/DockerRegistry\:5000/ca.crt
 ```
 ### 3. Ensure ownership of dirs and files
 ```sh
@@ -48,8 +50,8 @@ docker run \
   -d -p 5000:5000 --restart=always --name registry \
   -v /app/docker/certs:/certs \
   -e STORAGE_PATH=/app/docker/registry \
-  -e REGISTRY_HTTP_TLS_CERTIFICATE=/app/docker/cert/server.crt \
-  -e REGISTRY_HTTP_TLS_KEY=/app/docker/cert/server.key \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/server.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/server.key \
   registry:2
 ```
 [docker hub]: <https://hub.docker.com/_/registry/>
