@@ -7,32 +7,31 @@ This cheat sheet shows how to start docker registry on Red Hat 7 with specyfic l
 
 ### 1. Instal docker, create dirs, add user and so on...
 ```sh
-yum --nogpgcheck install docker-engine.x86_64 docker-engine-selinux.noarch
-adduser docreg
-passwd docreg
-usermod -aG docker docreg
-mkdir -p /app/docker/certs
-mkdir -p /app/docker/registry
-mkdir -p /app/docker/images
+$ yum --nogpgcheck install docker-engine.x86_64 docker-engine-selinux.noarch
+$ adduser docreg
+$ passwd docreg
+$ usermod -aG docker docreg
+$ mkdir -p /app/docker/certs
+$ mkdir -p /app/docker/registry
+$ mkdir -p /app/docker/images
+$ systemctl enable docker
 ```
 ### 2. Get TLS certificates
-Proper signeed certificate
+Properly signed certificate
 ```sh
-cd /app/docker/certs
+$ cd /app/docker/certs
 # generate key (-des3 for passphrase)
-openssl genrsa 2048 > server.key
+$ openssl genrsa 2048 > server.key
 # generate signing request (CN must be a FQDN of your server)
-openssl req -new -key server.key -out server.csr
+$ openssl req -new -key server.key -out server.csr
 ```
-You may sign the certificate by yourself using following command, but then you have to copy ```server.crt``` file to ```/etc/docker/certs.d/YOUR_FQDN:5000/ca.crt``` for every deamon
+You may sign the certificate by yourself using following command, but then you have to copy ```server.crt``` file to ```/etc/docker/certs.d/YOUR_FQDN:5000/ca.crt``` for every client daemon
 ```sh
-openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-# on client where DockerRegistry is FQDN of registry server
-scp docker@DockerRegistry:/app/docker/certs/*crt /etc/docker/certs.d/DockerRegistry\:5000/ca.crt
+$ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 ```
 ### 3. Ensure ownership of dirs and files
 ```sh
-chown -R docreg:docker /app/docker
+$ chown -R docreg:docker /app/docker
 ```
 ### 4. Edit ```/etc/systemd/system/multi-user.target.wants/docker.service```
 ```
@@ -40,13 +39,12 @@ ExecStart=/usr/bin/dockerd -g /app/docker/images
 ```
 ### 5. Take care of daemon's stuff
 ```sh
-systemctl daemon-reload
-systemctl enable docker
-service docker restart
+$ systemctl daemon-reload
+$ service docker restart
 ```
 ### 6. Run registry container
 ```sh
-docker run \
+$ docker run \
   -d -p 5000:5000 --restart=always --name registry \
   -v /app/docker/certs:/certs \
   -e STORAGE_PATH=/app/docker/registry \
