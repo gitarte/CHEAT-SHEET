@@ -38,5 +38,9 @@ Sample result:
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 debian              latest              031143c1c662        2 weeks ago         125.1 MB
 ```
-
+### 6. Tag and push image toregistry DockerRegistry at port 5000
+```sh
+docker tag imageName DockerRegistry:5000/imageName
+docker push DockerRegistry:5000/imageName
+```
 [install docker]: <https://docs.docker.com/engine/installation/linux/rhel/>
