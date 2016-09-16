@@ -26,9 +26,10 @@ $ docker save imageName > imageName.tar
 ```sh
 $ docker load < imageName.tar
 ```
-### 4. Tag an image as remote registry and push it
+### 4. Tag an image as remote registry, push it to registry and pull when you wish
 ```sh
 $ docker tag imageName registry_fqdn:5000/imageName
 $ docker push registry_fqdn:5000/imageName
+$ docker pull registry_fqdn:5000/imageName
 ```
 Mind the constraints while using self signed certificate
