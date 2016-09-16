@@ -1,4 +1,4 @@
-# DOCKER OFFLINE CLIENT AND REGISTRY
+# DOCKER IMAGES
 ### Overview
 This cheat sheet shows how to:
 * 1. Plain stuff
