@@ -20,15 +20,15 @@ Deleted: sha256:9e63c5bce4585dd7038d830a1f1f4e44cb1a1515b00e620ac718e934b484c938
 ```
 ### 2. Backup to tarball
 ```sh
-docker save imageName > imageName.tar
+$ docker save imageName > imageName.tar
 ```
 ### 3. Load from tarball
 ```sh
-docker load < imageName.tar
+$ docker load < imageName.tar
 ```
 ### 4. Tag an image as remote registry and push it
 ```sh
-docker tag imageName registry_fqdn:5000/imageName
-docker push registry_fqdn:5000/imageName
+$ docker tag imageName registry_fqdn:5000/imageName
+$ docker push registry_fqdn:5000/imageName
 ```
 Mind the constraints while using self signed certificate
