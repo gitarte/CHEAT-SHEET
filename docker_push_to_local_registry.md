@@ -1,6 +1,9 @@
 # DOCKER OFFLINE CLIENT AND REGISTRY
 ### Overview
-This cheat sheet shows how to deal with docker in separate network environment.
+This cheat sheet shows how to
+* 1. Extract image as a file to move it aroung 
+* 2. Load extracted image into docker
+* 3. Push an image into private registry
 ### 1. Backup to tarball
 ```sh
 docker save imageName > imageName.tar
