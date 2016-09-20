@@ -17,7 +17,13 @@ $ # install and configure swarm:
 $ docker run --restart=always -d -p 3375:2375 swarm manage consul://192.168.43.100:8500
 ```
 ### Create swarm nodes
-To add a particular docker-engine machine into cluster you can execute ```swarm join``` command on each of them. In this example however we stay lagged into SwarmManager and execute all of the commands from this single machine by pointing the relevant docker-engine each time.
+To add a particular docker-engine machine into cluster you execute ```swarm join``` command on each of them.
+```sh
+$ docker run -d swarm join --advertise=192.168.43.101:2375 consul://192.168.43.100:8500
+$ docker run -d swarm join --advertise=192.168.43.102:2375 consul://192.168.43.100:8500
+$ docker run -d swarm join --advertise=192.168.43.103:2375 consul://192.168.43.100:8500
+```
+You can also stay lagged into SwarmManager and execute all of the commands from this single machine by pointing the relevant docker-engine address each time. In this case be sure that docker-engine on node machines actually listens to TCP
 ```sh
 $ docker -H=tcp://192.168.43.101:2375 run -d swarm join --advertise=192.168.43.101:2375 consul://192.168.43.100:8500
 $ docker -H=tcp://192.168.43.102:2375 run -d swarm join --advertise=192.168.43.102:2375 consul://192.168.43.100:8500
