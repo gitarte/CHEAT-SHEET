@@ -1,7 +1,8 @@
 # DOCKER-SWARM
 This cheat-sheet presents task to be done while creating and managing basic docker-swarm cluster.
 ### Cluster topology
-Create as many machines as you wish. Each has to have working operating system and docker engine.
+Create as many machines as you wish. Each has to have working operating system and docker-engine. Docker daemon has to listen to TCP. You cam achive it by adding 
+```-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock``` to start script ```/lib/systemd/system/docker.service```
 ```
 SwarmManager: 192.168.43.100 Debian + docker-engine
 SwarmNode1:   192.168.43.101 Debian + docker-engine
