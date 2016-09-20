@@ -12,7 +12,7 @@ SwarmNode3:   192.168.43.103 Debian + docker-engine
 Login to SwarmManager machine.
 ```sh
 $ # install and configure consul:
-$ docker run --restart=always -d -p 8500:8500 -h CONSUL progium/consul -server -bootstrap
+$ docker run --restart=always -d -p 8500:8500 -h CONSUL consul -server -bootstrap
 $ # install and configure swarm:
 $ docker run --restart=always -d -p 3375:2375 swarm manage consul://192.168.43.100:8500
 ```
