@@ -1,4 +1,4 @@
-# docker-swarm know how
+# DOCKER-SWARM
 This cheat-sheet presents task to be done while creating and managing basic docker-swarm cluster.
 ### Cluster topology
 Create as many machines as you wish. Each has to have working operating system and docker engine.
