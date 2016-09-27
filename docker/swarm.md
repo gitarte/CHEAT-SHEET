@@ -17,11 +17,12 @@ TCP and UDP port 4789 for overlay network traffic
 
 Install docker-engine on each of them:
 I do recommend:
-* [https://docs.docker.com/engine/installation/linux/debian/ Debian]
-* [https://docs.docker.com/engine/installation/linux/ubuntulinux/ Ubuntu]
+* [https://docs.docker.com/engine/installation/linux/debian Debian]
+* [https://docs.docker.com/engine/installation/linux/ubuntulinux Ubuntu]
+
 I don't recommend (learn about Docker vs. Device Mapper):
-* [https://docs.docker.com/engine/installation/linux/centos/ CentOS]
-* [https://docs.docker.com/engine/installation/linux/rhel/ Red Hat]
+* [https://docs.docker.com/engine/installation/linux/centos CentOS]
+* [https://docs.docker.com/engine/installation/linux/rhel RedHat]
 
 Ensure to install version >= 1.12.x
 ```sh
