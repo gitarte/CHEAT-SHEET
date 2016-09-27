@@ -322,7 +322,7 @@ Insecure Registries:
 
 ```
 
-### Deplay a service into swarm
+### Deploy a service into swarm
 We will deploy a good old and beloved nginx. We will map innternal port 80 to external port 8080:
 ```sh
 dkr@SwarmManager:~$ docker service create --replicas 1 --name MaybeRussianButWorks -p 8080:80 nginx
