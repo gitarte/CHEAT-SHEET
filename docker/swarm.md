@@ -3,10 +3,10 @@ This cheat-sheet presents task to be done while creating and managing basic dock
 ### The infrastructure
 Prepare some hosts and optionally manage their hostnames
 ```
-SwarmManager	46.101.145.97
-SwarmNode1		46.101.113.20
-SwarmNode2		46.101.121.143
-SwarmNode3		46.101.117.111
+SwarmManager	192.168.1.100
+SwarmNode1		192.168.1.101
+SwarmNode2		192.168.1.102
+SwarmNode3		192.168.1.103
 ```
 Ensure they see each other over IP network and following ports are opened:
 ```
@@ -48,14 +48,14 @@ Server:
 ### Create a swarm
 This is one-liner that you do on SwarmManger machine. Take a look at the output which tells how to add nodes to just created swarm.
 ```sh
-dkr@SwarmManager:~$ docker swarm init --advertise-addr 46.101.145.97
+dkr@SwarmManager:~$ docker swarm init --advertise-addr 192.168.1.100
 Swarm initialized: current node (5yb1pr0lfgbmt8n3byck1kvng) is now a manager.
 
 To add a worker to this swarm, run the following command:
 
     docker swarm join \
     --token SWMTKN-1-5x770oq91omm7yqh8r1afoagqwf6neqq6xf3iyrqjq1ejha9g6-3styjwv1kxua5spm1h7fp8rkx \
-    46.101.145.97:2377
+    192.168.1.100:2377
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
@@ -65,7 +65,7 @@ To add a node to a swarm go to the relevant machine and execute a command that w
 ```sh
 dkr@SwarmNode1:~$ docker swarm join \
 > --token SWMTKN-1-5x770oq91omm7yqh8r1afoagqwf6neqq6xf3iyrqjq1ejha9g6-3styjwv1kxua5spm1h7fp8rkx \
-> 46.101.145.97:2377
+> 192.168.1.100:2377
 This node joined a swarm as a worker.
 ```
 You can get it at any time by executing the following on Swarm Manager:
@@ -76,7 +76,7 @@ To add a worker to this swarm, run the following command:
 
     docker swarm join \
     --token SWMTKN-1-5x770oq91omm7yqh8r1afoagqwf6neqq6xf3iyrqjq1ejha9g6-3styjwv1kxua5spm1h7fp8rkx \
-    46.101.145.97:2377
+    192.168.1.100:2377
 
 dkr@SwarmManager:~$ # to get the token for another manager
 dkr@SwarmManager:~$ docker swarm join-token manager
@@ -84,7 +84,7 @@ To add a manager to this swarm, run the following command:
 
     docker swarm join \
     --token SWMTKN-1-5x770oq91omm7yqh8r1afoagqwf6neqq6xf3iyrqjq1ejha9g6-0vov9b8smhlwcvqrmox6zo1oq \
-    46.101.145.97:2377
+    192.168.1.100:2377
 
 ```
 
@@ -158,7 +158,7 @@ dkr@SwarmManager:~$ docker node inspect SwarmManager
         "ManagerStatus": {
             "Leader": true,
             "Reachability": "reachable",
-            "Addr": "46.101.145.97:2377"
+            "Addr": "192.168.1.100:2377"
         }
     }
 ]
@@ -250,7 +250,7 @@ Swarm: active
   Heartbeat Period: 5 seconds
  CA Configuration:
   Expiry Duration: 3 months
- Node Address: 46.101.145.97
+ Node Address: 192.168.1.100
 Runtimes: runc
 Default Runtime: runc
 Security Options:
@@ -295,7 +295,7 @@ Plugins:
 Swarm: active
  NodeID: cde8j6a4e20c7meb8ecrlc0vy
  Is Manager: false
- Node Address: 46.101.113.20
+ Node Address: 192.168.1.101
 Runtimes: runc
 Default Runtime: runc
 Security Options:
