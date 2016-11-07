@@ -1,6 +1,7 @@
 # INSTALL DOCKER 
 ### ONDEBIAN 8.x
 ```sh
+$ #to install
 $ apt-get update
 $ apt-get -y upgrade
 $ apt-get -y install apt-transport-https ca-certificates
@@ -8,8 +9,13 @@ $ apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118
 $ echo "deb https://apt.dockerproject.org/repo debian-jessie main" >> /etc/apt/sources.list
 $ apt-get update
 $ apt-get -y install docker-engine
-$ gpasswd -a ${USER} docker
-$ service docker restart
+$ systemctl enable docker.service
+$ systemctl start docker
+$ adduser -g docker docker
+$
+$ #to verify
+$ su - docker
+$ docker images
 ```
 
 ### CENTOS 7.x
