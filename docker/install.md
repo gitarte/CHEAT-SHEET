@@ -1,5 +1,5 @@
 # INSTALL DOCKER 
-### ONDEBIAN 8.x
+### DEBIAN 8.x
 ```sh
 $ #to install
 $ apt-get update
