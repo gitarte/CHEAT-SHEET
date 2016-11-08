@@ -1,5 +1,5 @@
 # CREATE CLUSTER OF VOLUMES
-There are 3 machines with hostnames ```shared1```, ```shared2``` and ```shared3``` that are visible over network and the hostnames can be resolved to IP address by DNS or /etc/hosts
+There are 3 machines with hostnames ```shared1```, ```shared2``` and ```shared3``` that are visible over network and the hostnames can be resolved to IP addresses by DNS or /etc/hosts
 
 ### DEBIAN 8.x
 ```sh
@@ -58,13 +58,8 @@ $ mkdir /mnt/appdata
 $ echo "sharedX:/gv0 /mnt/appdata glusterfs defaults,_netdev 0 0" | sudo tee -a /etc/fstab
 $ mount /mnt/appdata
 
-$ # to verify
-[root@shared1 ~]# cd /mnt/appdata/
-[root@shared1 appdata]# touch dupa
-
-[root@shared2 ~]# ls /mnt/appdata/
-dupa
-
-[root@shared3 ~]# ls /mnt/appdata/
-dupa
+$ # to verify create a file in /mnt/appdata/ on shared1 
+$ touch /mnt/appdata/dupa
+$ # then look for it in the same direcotry on other volumes
+$ ls /mnt/appdata/
 ```
