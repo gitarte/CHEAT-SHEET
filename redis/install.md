@@ -6,6 +6,7 @@ TO DO...
 
 ### CENTOS 7.x
 Well.. f**k SELInux! Type ```SELINUX=disabled``` in /etc/selinux/config and reboot...
+
 Easy way:
 ```sh
 $ wget -r --no-parent -A 'epel-release-*.rpm' http://dl.fedoraproject.org/pub/epel/7/x86_64/e/
