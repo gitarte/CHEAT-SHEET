@@ -18,9 +18,9 @@ OPTIONS=" -f $CONFIGFILE"
 with 
 
 ```sh
-OPTIONS=" -f $CONFIGFILE --keyFile '/var/lib/mongo/certs/replicakey' --replSet 'rsX'"
+OPTIONS=" -f $CONFIGFILE --keyFile '/var/lib/mongo/certs/replicakey' --replSet 'rSetPoc'"
 ``` 
-changing X to specific replica set number. Then exec
+Then exec
 ```sh
 $ systemctl daemon-reload
 ```
@@ -47,15 +47,53 @@ $ service mongod restart
 ```
 
 ### 5. Initiate the replica set
-On ```shared1``` connect to mongo shell and execute rs.initiate()
-```sh
-$ mongo
-> rs.initiate()
+On ```shared1``` connect to mongo shell and execute
+```javascript
+rs.initiate(
+  {
+    _id : "rSetPoc",
+    members: [
+      { _id : 0, host : "shared1:27017" },
+      { _id : 1, host : "shared2:27017" },
+      { _id : 2, host : "shared3:27017" }
+    ]
+  }
+)
 ```
-### 6. Add members to the replica set
-On ```shared1``` connect to mongo shell and execute:
-```sh
-rs.add("shared2")
-rs.add("shared3")
+### 6. Create user with privileges to create other users
+Connect to the mongo shell that at te moment is voted to be PRIMARY. Then execute:
+```javascript
+admin = db.getSiblingDB("admin")
+admin.createUser(
+  {
+    user: "rsadmin",
+    pwd: "stupidpasswd",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  }
+)
+```
+### 7. Create cluster admin
+Connect to the mongo shell that at te moment is voted to be PRIMARY. Then execute:
+```javascript
+db.getSiblingDB("admin").auth("rsadmin", "stupidpasswd" )
+db.getSiblingDB("admin").createUser(
+  {
+    "user" : "clusteradmin",
+    "pwd" : "stupidpasswd2",
+    roles: [ { "role" : "clusterAdmin", "db" : "admin" } ]
+  }
+)
+```
+### 8. Create app user
+Connect to the mongo shell that at te moment is voted to be PRIMARY. Then execute:
+```javascript
+db.getSiblingDB("admin").auth("rsadmin", "stupidpasswd" )
+db.getSiblingDB("admin").createUser(
+  {
+    "user" : "apudUser",
+    "pwd" : "apudPass",
+    roles: [ { "role" : "readWrite", "db" : "apud" } ]
+  }
+)
 ```
 [install]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/mongodb/install.md>
