@@ -4,11 +4,6 @@ This cheat sheet shows how to configure MongoDB's replica set. Machines ```share
 ### 1. Install MongoDB on each machine
 Follow instructions in this link [install]
 ### 2. Give a name to each MongoDB installation and set the path to auth key
-```sh
-shared1 = rs1
-shared2 = rs2
-shared3 = rs3
-```
 On each machine edit ```/etc/init.d/mongod``` file and replace 
 ```sh
 OPTIONS=" -f $CONFIGFILE"
@@ -18,7 +13,7 @@ with
 ```sh
 OPTIONS=" -f $CONFIGFILE --keyFile '/var/lib/mongo/certs/replicakey' --replSet 'rSetPoc'"
 ``` 
-Then exec
+where ```rSetPoc``` is the actual name of replica set. Then exec
 ```sh
 $ systemctl daemon-reload
 ```
