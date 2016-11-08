@@ -1,5 +1,6 @@
 # CREATE CLUSTER OF VOLUMES
-There are 3 machines with hostnames ```shared1```, ```shared2``` and ```shared3``` that are visible over network and the hostnames can be resolved to IP addresses by DNS or /etc/hosts
+### Overview
+This cheat sheet shows how to configure cluster of GlusterFS's volumes. There are 3 machines with hostnames ```shared1```, ```shared2``` and ```shared3``` The machines are visible over network and their hostnames can be resolved to IP addresses thanks to ```/etc/hosts``` file.
 
 ### DEBIAN 8.x
 ```sh
