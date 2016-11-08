@@ -1,10 +1,8 @@
 # MongoDB REPLICA SET
 ### Overview
-This cheat sheet shows how to configure MongoDB's replica set. The machines are visible over network and their hostnames can be resolved to IP addresses thanks to ```/etc/hosts``` file.
-
+This cheat sheet shows how to configure MongoDB's replica set. Machines ```shared1```, ```shared2``` and ```shared3``` are visible over network and their hostnames can be resolved to IP addresses thanks to ```/etc/hosts``` file.
 ### 1. Install MongoDB on each machine
 Follow instructions in this link [install]
-
 ### 2. Give a name to each MongoDB installation and set the path to auth key
 ```sh
 shared1 = rs1
