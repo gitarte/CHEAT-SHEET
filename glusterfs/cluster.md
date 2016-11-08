@@ -1,4 +1,6 @@
-# CREATE CLUSTER FOR GLUSTERFS 
+# CREATE CLUSTER OF VOLUMES
+There are 3 machines with hostnames ```shared1```, ```shared2``` and ```shared3``` that are visible over network and the hostnames can be resolved to IP address by DNS or /etc/hosts
+
 ### DEBIAN 8.x
 ```sh
 TO DO...
