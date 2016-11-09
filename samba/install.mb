@@ -1,0 +1,17 @@
+# INSTALL Samba 
+### DEBIAN 8.x
+```sh
+TO DO...
+```
+
+### CENTOS 7.x
+Well.. f**k SELInux! Type ```SELINUX=disabled``` in /etc/selinux/config and reboot...
+```sh
+$ yum -y install samba samba-client samba-common
+$  mv /etc/samba/smb.conf /etc/samba/smb.conf.bak
+$  # do some config in /etc/samba/smb.conf
+$  systemctl enable smb.service
+$  systemctl enable nmb.service
+$  systemctl restart smb.service
+$  systemctl restart nmb.service
+```
