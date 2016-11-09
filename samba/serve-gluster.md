@@ -37,5 +37,5 @@ $ mount -t cifs //shared2/gluster /gluster/res2 -o rw,user=mysamba
 $ mount -t cifs //shared2/gluster /gluster/res2 -o rw,user=mysamba
 ```
 Manipulation of the content of any ```/gluster/resX``` should take results in each other as well as on each```sharedX``` in ```/mnt/appdata``` 
-[samba]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/glusterfs/cluster.md>
-[gluster]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/samba/install.mb>
+[gluster]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/glusterfs/cluster.md>
+[samba]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/samba/install.mb>
