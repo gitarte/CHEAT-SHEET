@@ -6,8 +6,8 @@ $ apt-get -y install linux-headers-`uname -r`
 $ # The rest is pretty much the same as for CentOS
 ```
 ### CENTOS 7.x
-First visit Node.js [home page] and choose version to be download. I preffer LTS which at the moment is v6.9.1. 
-Copy the download link of source code. In my case it is [this]
+First visit Node.js [home page] and choose version to download. I preffer LTS which at the moment is v6.9.1. 
+Copy the source code download link. In my case it is [this] 
 ```sh
 $ yum -y groupinstall "Development Tools"
 $ yum -y install kernel-devel
