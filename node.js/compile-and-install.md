@@ -3,7 +3,7 @@
 ```sh
 $ apt-get -y install build-essential 
 $ apt-get -y install linux-headers-`uname -r`
-$ # The rest is pretty much the same procedure as for CentOS
+$ # The rest is pretty much the same as for CentOS
 ```
 ### CENTOS 7.x
 First visit Node.js [home page] and choose version to be download. I preffer LTS which at the moment is v6.9.1. 
