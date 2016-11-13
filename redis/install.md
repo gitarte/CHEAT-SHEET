@@ -31,6 +31,7 @@ $ cp sentinel.conf /etc/redis/
 $ vim /etc/redis/redis.conf
 supervised systemd
 dir /var/lib/redis
+logfile /var/log/redis/redis.log
 $ tee /usr/lib/systemd/system/redis.service <<-'EOF'
 [Unit]
 Description=Redis In-Memory Data Store
@@ -48,7 +49,10 @@ WantedBy=multi-user.target
 EOF
 $ adduser redis
 $ mkdir /var/lib/redis
-$ chown redis:redis /var/lib/redis
+$ mkdir /var/log/redis
+$ chown -R redis:redis /var/lib/redis
+$ chown -R redis:redis /var/log/redis
+$ chown -R redis:redis /etc/redis
 $ systemctl start redis.service
 $ systemctl enable redis.service
 ```
