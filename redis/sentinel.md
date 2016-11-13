@@ -6,13 +6,14 @@ Follow instructions in this [install] link.
 ### 2. Create sentinel's configuration file
 On each machine edit ```/etc/redis/sentinel.conf``` and set following entries (don't change the host name):
 ```sh
-dir /tmp
-logfile /var/log/redis/sentinel.log
 port 16379
 sentinel monitor                 myRedisCluster shared1 6379 2
+sentinel auth-pass               myRedisCluster stupidpassword3
 sentinel down-after-milliseconds myRedisCluster 5000
-sentinel parallel-syncs          myRedisCluster 1
 sentinel failover-timeout        myRedisCluster 10000
+sentinel parallel-syncs          myRedisCluster 1
+logfile /var/log/redis/sentinel.log
+dir /tmp
 ```
 ### 2. Create sentinel's startup script
 On each machine:
