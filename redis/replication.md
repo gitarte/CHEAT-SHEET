@@ -1,6 +1,6 @@
-# Redis CLUSTER
+# Redis REPLICATION
 ### Overview
-This cheat sheet shows how to configure Redis's cluster. Machines ```shared1```, ```shared2``` and ```shared3``` are visible over network and their hostnames can be resolved to IP addresses thanks to ```/etc/hosts``` file.
+This cheat sheet shows how to configure Redis's replication, where master node on host ```shared1``` has two exact copies on hosts ```shared2``` and ```shared3```. All machines are visible over network and their hostnames can be resolved to IP addresses thanks to ```/etc/hosts``` file.
 ### 1. Install Redis on each machine
 Follow instructions in this link [install]
 ### 2. Create master node
