@@ -1,10 +1,10 @@
 # Redis SENTINEL
 ### Overview
 This cheat sheet shows how to configure Redis's sentinel. Machines ```shared1```, ```shared2``` and ```shared3``` are visible over network and their hostnames can be resolved to IP addresses thanks to ```/etc/hosts``` file. Visit [howto] for more details.
-### 1. Install Redis and set cluster on each machine
-Follow instructions in this [install] and this [cluter] link.
-### 2. Create master node
-On ```sharedX``` edit ```/etc/redis-sentinel.conf``` and set following entries:
+### 1. Install Redis on each machine
+Follow instructions in this [install] link.
+### 2. Create sentinel's configuration file
+On each machine edit ```/etc/redis/sentinel.conf``` and set following entries (don't change the host name):
 ```sh
 dir /tmp
 logfile /var/log/redis/sentinel.log
@@ -14,8 +14,7 @@ sentinel down-after-milliseconds myRedisCluster 5000
 sentinel parallel-syncs          myRedisCluster 1
 sentinel failover-timeout        myRedisCluster 10000
 ```
-Dont change the host name.
-### 2. Create sentinel's configuration file
+### 2. Create sentinel's startup script
 On each machine:
 ```sh
 $ tee /usr/lib/systemd/system/sentinel.service <<-'EOF'
@@ -24,7 +23,7 @@ Description=Redis persistent key-value database
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/redis-server /etc/redis-sentinel.conf --sentinel
+ExecStart=/usr/local/bin/redis-server /etc/redis/sentinel.conf --sentinel
 ExecStop=/usr/bin/redis-shutdown
 User=redis
 Group=redis
@@ -39,9 +38,8 @@ $ systemctl enable sentinel.service
 ### 3. Check if it's working
 ```sh
 $ ps ax | grep redis
-  725 ?        Ssl    0:04 /usr/bin/redis-server *:6379
- 2296 ?        Ssl    0:04 /usr/bin/redis-server *:16380
+  725 ?        Ssl    0:04 /usr/local/bin/redis-server *:6379
+ 2296 ?        Ssl    0:04 /usr/local/bin/redis-server *:16380
 ```
 [install]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/redis/install.md>
-[sentinel]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/redis/cluster.md>
 [howto]: <http://redis.io/topics/sentinel>
