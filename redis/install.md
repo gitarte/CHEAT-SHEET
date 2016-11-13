@@ -20,11 +20,35 @@ Fun way :) :
 $ yum -y groupinstall "Development Tools"
 $ yum -y install kernel-devel
 $ wget http://download.redis.io/releases/redis-3.2.5.tar.gz
-$ tar xzf redis-3.2.5.tar.gz
+$ tar xvzf redis-3.2.5.tar.gz
 $ cd redis-3.2.5/deps
 $ make hiredis jemalloc linenoise lua geohash-int
 $ cd ..
 $ make && make install
-$ cp redis.conf /etc/
-$ cp sentinel.conf /etc/
+$ mkdir /etc/redis
+$ cp redis.conf /etc/redis/
+$ cp sentinel.conf /etc/redis/
+$ vim /etc/redis/redis.conf
+supervised systemd
+dir /var/lib/redis
+$ tee /usr/lib/systemd/system/redis.service <<-'EOF'
+[Unit]
+Description=Redis In-Memory Data Store
+After=network.target
+
+[Service]
+User=redis
+Group=redis
+ExecStart=/usr/local/bin/redis-server /etc/redis/redis.conf
+ExecStop=/usr/local/bin/redis-cli shutdown
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+$ adduser redis
+$ mkdir /var/lib/redis
+$ chown redis:redis /var/lib/redis
+$ systemctl start redis.service
+$ systemctl enable redis.service
 ```
