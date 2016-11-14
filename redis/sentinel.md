@@ -3,9 +3,12 @@
 This cheat sheet shows how to configure Redis's sentinel. Machines ```shared1```, ```shared2``` and ```shared3``` are visible over network and their hostnames can be resolved to IP addresses thanks to ```/etc/hosts``` file. Visit [howto] for more details.
 ### 1. Install Redis on each machine
 Follow instructions in this [install] link.
-### 2. Create sentinel's configuration file
-On each machine edit ```/etc/redis/sentinel.conf``` and set following entries (don't change the host name):
+### 2. Join machines with replication mode
+Follow instructions in this [replication] link.
+### 3. Create sentinel's configuration file
+On each machine execute following command (don't change the host name):
 ```sh
+$ tee /etc/redis/sentinel.conf <<-'EOF'
 port 26379
 protected-mode no
 dir /tmp
@@ -15,8 +18,9 @@ sentinel auth-pass               myRedisMaster stupidpassword3
 sentinel down-after-milliseconds myRedisMaster 5000
 sentinel failover-timeout        myRedisMaster 10000
 sentinel parallel-syncs          myRedisMaster 1
+EOF
 ```
-### 2. Create sentinel's startup script
+### 4. Create sentinel's startup script
 On each machine:
 ```sh
 $ tee /usr/lib/systemd/system/sentinel.service <<-'EOF'
@@ -37,11 +41,12 @@ $ systemctl daemon-reload
 $ systemctl start sentinel.service
 $ systemctl enable sentinel.service
 ```
-### 3. Check if it's working
+### 5. Check if it's working
 ```sh
 $ ps ax | grep redis
   725 ?        Ssl    0:04 /usr/local/bin/redis-server *:6379
  2296 ?        Ssl    0:04 /usr/local/bin/redis-server *:16380
 ```
 [install]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/redis/install.md>
+[replication]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/redis/replication.md>
 [howto]: <http://redis.io/topics/sentinel>
