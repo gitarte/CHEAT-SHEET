@@ -8,6 +8,7 @@ On ```shared1``` edit ```/etc/redis/redis.conf``` and set or change following en
 ```sh
 tcp-keepalive 60
 #bind 127.0.0.1
+masterauth  stupidpassword3
 requirepass stupidpassword3
 maxmemory-policy noeviction
 appendonly yes
@@ -21,9 +22,9 @@ $ systemctl restart redis.service
 On ```shared1``` and ```shared2``` edit ```/etc/redis.conf``` and set or change following entries:
 ```sh
 #bind 127.0.0.1
+masterauth stupidpassword3
 requirepass stupidpassword3
 slaveof shared1 6379
-masterauth stupidpassword3
 ```
 Restart Redis
 ```sh
