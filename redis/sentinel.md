@@ -45,7 +45,7 @@ $ systemctl enable sentinel.service
 ```sh
 $ ps ax | grep redis
   725 ?        Ssl    0:04 /usr/local/bin/redis-server *:6379
- 2296 ?        Ssl    0:04 /usr/local/bin/redis-server *:16380
+ 2296 ?        Ssl    0:04 /usr/local/bin/redis-server *:26380
 ```
 [install]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/redis/install.md>
 [replication]: <https://github.com/gitarte/CHEAT-SHEET/blob/master/redis/replication.md>
