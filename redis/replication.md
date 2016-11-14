@@ -19,7 +19,7 @@ Restart Redis
 $ systemctl restart redis.service
 ```
 ### 3. Create slave nodes
-On ```shared1``` and ```shared2``` edit ```/etc/redis.conf``` and set or change following entries:
+On ```shared1``` and ```shared2``` edit ```/etc/redis/redis.conf``` and set or change following entries:
 ```sh
 #bind 127.0.0.1
 masterauth stupidpassword3
