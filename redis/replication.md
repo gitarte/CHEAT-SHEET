@@ -4,7 +4,7 @@ This cheat sheet shows how to configure Redis's replication, where master node o
 ### 1. Install Redis on each machine
 Follow instructions in this link [install]
 ### 2. Create master node
-On ```shared1``` edit ```/etc/redis/redis.conf``` and set or change entries to following:
+On ```shared1``` edit ```/etc/redis/redis.conf``` and set or change entries sa follows:
 ```sh
 tcp-keepalive 60
 #bind 127.0.0.1
