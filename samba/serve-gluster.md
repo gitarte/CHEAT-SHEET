@@ -1,4 +1,4 @@
-# MongoDB REPLICA SET
+# GlusterFS over Samba
 ### Overview
 This cheat sheet shows how to configure Samba to serve GlusterFS storage. Machines ```shared1```, ```shared2``` and ```shared3``` are visible over network and their hostnames can be resolved to IP addresses thanks to ```/etc/hosts``` file.
 ### 1. Install Samba and set GlusterFS cluster on each machine
