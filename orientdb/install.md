@@ -38,6 +38,7 @@ Group=ORIENTDB_GROUP
 ExecStart=/opt/orientdb/bin/server.sh
 EOF
 $ adduser orientdb
+$ passwd orientdb
 $ chown -R orientdb:orientdb /opt/orientdb
 $ systemctl daemon-reload
 $ systemctl start  orientdb.service
