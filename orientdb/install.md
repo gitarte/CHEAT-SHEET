@@ -5,7 +5,7 @@ TO DO...
 ```
 
 ### CENTOS 7.x
-Easy way:
+Easy way (preferred):
 ```sh
 $ wget https://orientdb.com/download.php?file=orientdb-community-2.2.0.tar.gz
 $ tar xvzr orientdb-community-2.2.0.tar.gz
