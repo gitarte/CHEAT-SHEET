@@ -33,8 +33,8 @@ After=syslog.target
 WantedBy=multi-user.target
 
 [Service]
-User=ORIENTDB_USER
-Group=ORIENTDB_GROUP
+User=orientdb
+Group=orientdb
 ExecStart=/opt/orientdb/bin/server.sh
 EOF
 $ adduser orientdb
