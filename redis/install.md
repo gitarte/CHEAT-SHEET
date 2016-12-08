@@ -1,7 +1,8 @@
 # INSTALL Redis 
 ### DEBIAN 8.x
 ```sh
-$ apt -y install build-essential tcl8.5
+$ apt -y install build-essential tcl8.5 wget
+$ wget http://download.redis.io/releases/redis-3.2.6.tar.gz
 $ tar xvzf redis-3.2.5.tar.gz
 $ cd redis-3.2.5/deps
 $ make hiredis jemalloc linenoise lua geohash-int
