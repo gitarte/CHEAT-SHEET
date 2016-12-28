@@ -12,7 +12,7 @@ Copy the source code download link. In my case it is [this]
 $ yum -y groupinstall "Development Tools"
 $ yum -y install kernel-devel
 $ # mind the version you download
-$ wget https://nodejs.org/dist/v6.9.1/node-v6.9.1.tar.gz
+$ wget https://nodejs.org/dist/v6.9.2/node-v6.9.2.tar.gz
 $ tar xvzf node-v6.9.1.tar.gz
 $ cd node-v6.9.1
 $ ./configure
