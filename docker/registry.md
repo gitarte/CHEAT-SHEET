@@ -26,7 +26,7 @@ $ docker run \
   -v /var/lib/docker/certs:/certs \
   -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/server.crt \
   -e REGISTRY_HTTP_TLS_KEY=/certs/server.key \
-  registry:2
+  registry:latest
 ```
 ### 3. Using the registry
 ```sh
