@@ -16,7 +16,7 @@ apt-get -y install wget curl
 apt-get -y install zip unzip
 apt-get -y install vim
 ```
-### Debootstrap your favorite Debian version (or deriverative)
+### Debootstrap your favorite Debian version (or derivative)
 ```sh
 # src: http://ftp.us.debian.org/debian/
 # dst: ./chroot directory 
