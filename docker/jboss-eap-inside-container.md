@@ -24,7 +24,6 @@ RUN    ["/opt/jboss-eap-7.0/bin/add-user.sh", "admin", "eapadmin", "--silent"]
 COPY   ["minimal.war", "/opt/jboss-eap-7.0/standalone/deployments/minimal.war"]
 CMD    ["/opt/jboss-eap-7.0/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
 ```
-
 ### build.sh
 ```sh
 docker build -t bsk-jboss . && \
@@ -33,4 +32,9 @@ docker run -d \
     -p 9990:9990 \
     --name jboss \
     bsk-jboss
+```
+### Enjoy the results
+```
+http://localhost/minimal/
+http://localhost:9990/    l:admin, p:eapadmin
 ```
