@@ -4,7 +4,7 @@
 build.sh  Dockerfile  jboss-eap-7.0  jdk-8u112-linux-x64.rpm  minimal.war
 ```
 Where:
-```
+```sh
 Dockerfile              # Docker image definition
 build.sh                # build image -> run container
 jboss-eap-7.0           # JBoss EAP 7 (already unzipped)
@@ -36,5 +36,5 @@ docker run -d \
 ### Enjoy the results
 ```
 http://localhost/minimal/
-http://localhost:9990/    l:admin, p:eapadmin
+http://localhost:9990/    (l:admin, p:eapadmin)
 ```
