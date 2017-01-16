@@ -6,7 +6,7 @@ build.sh  Dockerfile  jboss-eap-7.0  jdk-8u112-linux-x64.rpm  minimal.war
 Where:
 ```sh
 Dockerfile              # Docker image definition
-build.sh                # build image -> run container
+build.sh                # convenient script that builds image runs container
 jboss-eap-7.0           # JBoss EAP 7 (already unzipped)
 jdk-8u112-linux-x64.rpm # Oracle JDK8 installator 
 minimal.war             # application to deploy
@@ -25,6 +25,7 @@ COPY   ["minimal.war", "/opt/jboss-eap-7.0/standalone/deployments/minimal.war"]
 CMD    ["/opt/jboss-eap-7.0/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
 ```
 ### build.sh
+Run this script to do the job for you
 ```sh
 docker build -t bsk-jboss . && \
 docker run -d \
