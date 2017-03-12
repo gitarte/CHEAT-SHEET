@@ -3,6 +3,7 @@
 set -x \
   && apt-get -y install build-essential cmake tcl scons \
   && apt-get -y install linux-headers-`uname -r` \
+  && apt-get -y install libindicator7 libappindicator1 \
   && apt-get -y install openssl libssl-dev pkg-config \
   && apt-get -y install python-pip python3-pip python-dev python3-dev \
   && pip  install --upgrade pip \
