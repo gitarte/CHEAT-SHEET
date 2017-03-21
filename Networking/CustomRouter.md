@@ -1,5 +1,8 @@
 ### Scenario
 ```bash
+Router platoform:
+        Raspberry Pi with Raspbian Jessie
+        
 WAN:
         network 192.168.14.0
         address 192.168.14.2
