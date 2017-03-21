@@ -3,7 +3,8 @@
 Router platoform:
         Raspberry Pi with Raspbian Jessie
         
-WAN:
+WAN:    
+        interface wlan0 (WiFi)
         network 192.168.14.0
         address 192.168.14.2
         netmask 255.255.255.0
@@ -12,6 +13,7 @@ WAN:
         dns-nameservers 192.168.14.1
 
 LAN:
+        interface eth0 (copper)
         network 192.168.16.0
         address 192.168.16.1
         netmask 255.255.255.0
