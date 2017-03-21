@@ -31,6 +31,8 @@ net.ipv4.ip_forward=1
 (...)
 ```
 ### /etc/iptables.rules
+Do not implement this in unsafe environments. This rules allows in- and outband traffic!
+
 ```bash
 *nat
 -A POSTROUTING -o wlan0 -j MASQUERADE
