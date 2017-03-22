@@ -8,6 +8,7 @@ set -x \
   && yum -y install geany \
   && yum -y install redhat-lsb libXScrnSaver \
   && yum -y install python2-pip python34-pip python-devel \
-  && yum -y install vlc mplayer\
+  && yum -y install vlc mplayer audacity \
+  && rpm -ivh /home/artgaw/Downloads/google-chrome-stable_current_x86_64.rpm \
   && echo "all done"
 ```
