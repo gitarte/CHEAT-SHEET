@@ -9,7 +9,8 @@ set -x \
   && yum -y install redhat-lsb libXScrnSaver \
   && yum -y install python2-pip python34-pip python-devel \
   && yum -y install gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld \
-  && yum -y install vlc mplayer audacity \
+  && yum -y install yum -y install lame lame-devel lame-libs lame-mp3x \
+  && yum -y install vlc mplayer audacity-nonfree \
   && rpm -ivh /home/artgaw/Downloads/google-chrome-stable_current_x86_64.rpm \
   && echo "all done"
 ```
