@@ -8,6 +8,8 @@ set -x \
   && yum -y install geany \
   && yum -y install redhat-lsb libXScrnSaver \
   && yum -y install python2-pip python34-pip python-devel \
+  && python3 -m pip install --upgrade pip \
+  && python3 -m pip install numpy scipy matplotlib ipython jupyter pandas sympy nose scikit-learn \
   && yum -y install gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld \
   && yum -y install yum -y install lame lame-devel lame-libs lame-mp3x \
   && yum -y install vlc mplayer audacity-nonfree \
