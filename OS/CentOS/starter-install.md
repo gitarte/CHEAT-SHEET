@@ -6,6 +6,7 @@ set -x \
   && yum -y install epel-release \
   && yum -y localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm \
   && yum -y install yum-utils lshw \
+  && yum -y install ntfs-3g.x86_64 ntfs-3g-devel.x86_64 ntfsprogs.x86_64
   && yum -y install redhat-lsb libXScrnSaver \
   && yum -y install python2-pip python34-pip python-devel \
   && python3 -m pip install --upgrade pip \
