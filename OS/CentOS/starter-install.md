@@ -2,9 +2,9 @@
 #!/bin/bash
 set -x \
   && yum -y install kernel-devel kernel-headers \
-  && yum -y install qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer bridge-utils
   && yum -y install epel-release \
   && yum -y localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm \
+  && yum -y install qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer bridge-utils
   && yum -y install yum-utils lshw \
   && yum -y install ntfs-3g.x86_64 ntfs-3g-devel.x86_64 ntfsprogs.x86_64
   && yum -y install redhat-lsb libXScrnSaver \
@@ -14,7 +14,7 @@ set -x \
   && yum -y install gstreamer{,1}-plugins-ugly gstreamer-plugins-bad-nonfree gstreamer1-plugins-bad-freeworld \
   && yum -y install yum -y install lame lame-devel lame-libs lame-mp3x \
   && yum -y install vlc mplayer audacity-nonfree \
-  && yum -y install geany gparted.x86_64 \
+  && yum -y install geany gparted \
   && rpm -ivh /home/artgaw/Downloads/google-chrome-stable_current_x86_64.rpm \
   && echo "all done"
 ```
