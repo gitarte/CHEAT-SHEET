@@ -15,5 +15,6 @@ set -x \
   && yum -y install yum -y install lame lame-devel lame-libs lame-mp3x \
   && yum -y install vlc mplayer audacity-nonfree \
   && yum -y install geany gparted \
+  && grub2-mkconfig -o /boot/grub2/grub.cfg \
   && echo "all done"
 ```
