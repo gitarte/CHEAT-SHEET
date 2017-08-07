@@ -15,8 +15,9 @@ set -x \
   && apt -y install git \
   && apt -y install qemu qemu-kvm virt-manager \
   && apt -y install traceroute screen gparted openssh-* \
-  && apt -y install unrar wine winetricks q4wine wine-mono0.0.8 \
+  && apt -y install unrar wine64 winetricks q4wine \
   && apt -y install vlc qnapi audacity audacity-data silan vamp-plugin-sdk \
+  && apt -y install vim geany \
   && apt -y install unity-tweak-tool \
   && dpkg -i /home/artgaw/Downloads/atom-amd64.deb \
   && apm install linter-flake8 \
