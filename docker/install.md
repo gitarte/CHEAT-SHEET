@@ -1,12 +1,13 @@
 # INSTALL DOCKER 
 ### UBUNTU 16.04
 ```sh
-apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
-apt-get -y update
-apt-get -y install docker-engine
-systemctl enable docker
-usermod -aG docker artgaw
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce
+sudo usermod -aG docker ${USER}
+sudo systemctl enable docker
+sudo systemctl restart docker
 ```
 ### DEBIAN 8.x
 ```sh
