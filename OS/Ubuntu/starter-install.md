@@ -18,7 +18,7 @@ set -x \
   && apt -y install unrar wine64 winetricks q4wine \
   && apt -y install vlc qnapi audacity audacity-data silan vamp-plugin-sdk \
   && apt -y install vim geany \
-  && apt -y install unity-tweak-tool \
+  && apt -y install gnome-tweak-tool \
   && dpkg -i /home/artgaw/Downloads/atom-amd64.deb \
   && apm install linter-flake8 \
   && apm install autocomplete-python \
