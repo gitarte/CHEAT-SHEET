@@ -21,6 +21,7 @@ set -x \
   && apt -y install gnome-tweak-tool \
   && echo "ALL DONE"
 
+# xhost +si:localuser:root
 #dpkg -i /home/artgaw/Downloads/atom-amd64.deb \
 #apm install linter-flake8 \
 #apm install autocomplete-python \
