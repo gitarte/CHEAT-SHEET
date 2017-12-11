@@ -5,7 +5,7 @@ set -x \
   && yum -y install epel-release \
   && yum -y localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm \
   && yum -y install qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer bridge-utils \
-  && yum -y install yum-utils lshw \
+  && yum -y install yum-utils lshw libgnome\
   && yum -y install ntfs-3g ntfs-3g-devel ntfsprogs os-prober\
   && yum -y install redhat-lsb libXScrnSaver \
   && yum -y install python2-pip python34-pip python-devel \
