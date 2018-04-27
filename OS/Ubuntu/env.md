@@ -1,6 +1,6 @@
 ```bash
 PS1="[\u@\h \W]\$ "
-JAVA_HOME=/usr/lib/jvm/jdk-9.0.4
+JAVA_HOME=/usr/lib/jvm/jdk-10.0.1
 JDK_HOME=$JAVA_HOME
 JRE_HOME=$JAVA_HOME
 MAVEN_HOME=/usr/local/apache-maven-3.5.3
