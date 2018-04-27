@@ -1,7 +1,7 @@
 ### On Ubuntu
 Download and extract JDK. In this example ```jdk-8u144-linux-x64.tar.gz```
 ```sh
-JDK=jdk1.8.0_144
+JDK=jdk-10.0.1
 mkdir /usr/lib/jvm
 mv $JDK /usr/lib/jvm/
 update-alternatives --install "/usr/bin/java"   "java"   "/usr/lib/jvm/$JDK/bin/java"   1
