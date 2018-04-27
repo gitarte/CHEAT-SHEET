@@ -1,3 +1,4 @@
+```bash
 PS1="[\u@\h \W]\$ "
 JAVA_HOME=/usr/lib/jvm/jdk-9.0.4
 JDK_HOME=$JAVA_HOME
@@ -8,3 +9,4 @@ SQLDEVELOPER_HOME=/usr/local/sqldeveloper
 GOPATH=$HOME/go
 GOROOT=/usr/local/go
 PATH=$PATH:$HOME/.local/bin:$HOME/bin:$MAVEN_HOME/bin:$IDEA_HOME/bin:$GOROOT/bin:$GOPATH/bin:$SQLDEVELOPER_HOME
+```
