@@ -7,6 +7,7 @@ set -x \
   && apt -y install openssl libssl-dev pkg-config \
   && apt -y install libpango1.0-0 libpangox-1.0-0 python-gobject-2 python-gtk2 \
   && apt -y install python-testresources python3-testresources python-pip python3-pip python-dev python3-dev \
+  && apt -y install python3-venv \
   && pip  install --upgrade pip \
   && pip3 install --upgrade pip \
   && pip  install flake8 \
