@@ -1,5 +1,5 @@
 ```bash
-PS1="[\u@\h \W]\$ "
+PS1="\e[;1;32m[\u@\h \W]\$ "
 JAVA_HOME=/usr/lib/jvm/jdk-10.0.1
 JDK_HOME=$JAVA_HOME
 JRE_HOME=$JAVA_HOME
