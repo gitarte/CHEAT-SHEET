@@ -22,7 +22,7 @@ set -x \
 && systemctl restart docker \
 && echo "=== ALL DONE ==="
 ```
-### UBUNTU 18.04
+### UBUNTU 18.04 AND 19.04
 ```
 sudo echo "Let's install docker-ce and docker-compose" \
 && sudo apt -y install apt-transport-https ca-certificates curl software-properties-common \
