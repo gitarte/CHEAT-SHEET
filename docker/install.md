@@ -41,7 +41,7 @@ sudo echo "Let's install docker-ce and docker-compose" \
 Finally reboot your machine
 ### DEBIAN 8.x
 ```bash
-echo "Let's install docker-ce and docker-compose" \
+echo "Let's install docker-ce" \
 && apt-get -y install apt-transport-httrver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
 && echo "deb https://apt.dockerproject.org/repo debian-jessie main" >> /etc/apt/sources.list \
 && apt-get -y update \
