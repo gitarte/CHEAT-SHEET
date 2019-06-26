@@ -41,13 +41,32 @@ sudo echo "Let's install docker-ce and docker-compose" \
 Finally reboot your machine
 ### DEBIAN 8.x
 ```bash
-set -x \
+echo "Let's install docker-ce and docker-compose" \
 && apt-get -y install apt-transport-httrver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
 && echo "deb https://apt.dockerproject.org/repo debian-jessie main" >> /etc/apt/sources.list \
 && apt-get -y update \
 && apt-get -y install docker-engine \
 && adduser -g docker docker \
 && systemctl enable docker.service \
+&& echo "=== ALL DONE ==="
+```
+Finally reboot your machine
+### DEBIAN 9.x
+Sitch into `root` first, remember to set destination username by setting `${USER}` correctly
+```bash
+echo "Let's install docker-ce and docker-compose" \
+&& apt -y update \
+&& apt -y upgrade \
+&& apt -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common \
+&& apt -y install git vim openssh-* \
+&& curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
+&& add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
+&& apt -y update \
+&& apt -y install docker-ce docker-ce-cli containerd.io \
+&& usermod -aG docker ${USER} \
+&& systemctl enable docker \
+&& curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
+&& chmod +x /usr/local/bin/docker-compose \
 && echo "=== ALL DONE ==="
 ```
 Finally reboot your machine
