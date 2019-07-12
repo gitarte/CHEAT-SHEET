@@ -32,11 +32,11 @@ sudo echo "Let's install docker-ce and docker-compose" \
 && sudo apt -y install docker-ce \
 && sudo usermod -aG docker ${USER} \
 && sudo systemctl enable docker \
-&& sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
+&& sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
 && sudo chmod +x /usr/local/bin/docker-compose \
-&& docker version \
-&& docker-compose version \
-&& echo "=== ALL DONE ==="
+&& sudo docker version \
+&& sudo docker-compose version \
+&& sudo echo "=== ALL DONE ==="
 ```
 Finally reboot your machine
 ### DEBIAN 8.x
