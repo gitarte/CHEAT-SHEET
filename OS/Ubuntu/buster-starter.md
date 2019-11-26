@@ -9,5 +9,6 @@ apt -y update \
   && apt -y install unrar wine64 winetricks q4wine \
   && apt -y install vlc qnapi audacity audacity-data silan vamp-plugin-sdk \
   && apt -y install gnome-shell-extension-top-icons-plus \
+  && apt -y ttf-mscorefonts-installer \
   && echo "ALL DONE"
 ```
