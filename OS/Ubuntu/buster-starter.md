@@ -1,10 +1,11 @@
 ```bash
 apt -y update \
   && apt -y upgrade \
-  && apt -y install build-essential dkms cmake tcl scons \
+  && apt -y install build-essential dkms cmake cmake-qt-gui tcl scons \
   && apt -y install linux-headers-`uname -r` net-tools \
   && apt -y install libindicator7 libappindicator1 \
   && apt -y install openssl libssl-dev pkg-config \
+  && apt -y install python-pip python3-pip \
   && apt -y install git apt-transport-https curl vim \
   && apt -y install traceroute screen gparted openssh-* \
   && apt -y install wine64 winetricks q4wine \
