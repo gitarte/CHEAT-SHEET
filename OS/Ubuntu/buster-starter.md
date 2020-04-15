@@ -11,6 +11,7 @@ apt -y update \
   && apt -y install wine64 winetricks q4wine \
   && apt -y install vlc audacity audacity-data silan vamp-plugin-sdk \
   && apt -y install ttf-mscorefonts-installer rar unrar libavcodec-extra gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-vaapi \
+  && apt -y install gnome-shell-extension-dashtodock gnome-shell-extension-top-icons-plus gnome-shell-extension-desktop-icons \
   && apt -y install firmware-linux firmware-linux-nonfree intel-microcode printer-driver-* firmware-iwlwifi \
   && modprobe iwlwifi \
   && curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add - \
