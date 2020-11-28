@@ -19,6 +19,8 @@ apt -y update \
   && echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list \
   && apt update \
   && apt -y install brave-browser \
+  && apt -y install chirp \
+  && addgroup "$USERNAME" dialout \
   && echo "ALL DONE"
 
 ```
