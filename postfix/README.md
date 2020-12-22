@@ -164,7 +164,7 @@ nc localhost 25
 ```
 
 ## verifie delivery
-### thoe basic way
+### the basic way
 ```bash
 ls /home/qqryq/Maildir/new/
 ```
