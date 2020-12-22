@@ -152,8 +152,8 @@ vim /etc/dovecot/conf.d/10-master.conf
 # # SSL/TLS support: yes, no, required. <doc/wiki/SSL.txt>
 # ssl = required
 # ...
-# ssl_cert = </etc/letsencrypt/live/mail.sp9ag.pl>/fullchain.pem
-# ssl_key = </etc/letsencrypt/live/mail.sp9ag.pl>/privkey.pem
+# ssl_cert = </etc/letsencrypt/live/mail.sp9ag.pl/fullchain.pem
+# ssl_key = </etc/letsencrypt/live/mail.sp9ag.pl/privkey.pem
 # ...
 # # SSL protocols to use
 # ssl_protocols = !SSLv2 !SSLv3
