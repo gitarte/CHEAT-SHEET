@@ -1,22 +1,27 @@
 # DIY MAIL SERVER
-Installing and configureing basic mailserver based on `postfix` and `dovecot`
 
-## setup DNS
-The example domain is `artgaw.pl` and mail server has IP `192.168.43.200`
+Example installation and configuration of basic mail server based on `postfix` and `dovecot` with TLS cert obtained from `let's encrypt`
+
+## setup the DNS
+
+The example domain is `sp9ag.pl` and mail server is `mail.sp9ag.pl` which points into `192.168.43.200`
 
 ### make DNS resolution to read the hosts file first
+
 ```bash
 echo "order hosts,bind" | cat - /etc/host.conf > temp && mv temp /etc/host.conf
 ```
 
 ### setup FQDN
+
 ```bash
-hostnamectl set-hostname mail.artgaw.pl
-echo "192.168.43.200 artgaw.pl mail.artgaw.pl" >> /etc/hosts
+hostnamectl set-hostname mail.sp9ag.pl
+echo "192.168.43.200 sp9ag.pl mail.sp9ag.pl" >> /etc/hosts
 systemctl reboot 
 ```
 
-### ensure the resutls after reboot 
+### ensure the resutls after reboot
+
 ```bash
 cat /etc/host.conf
 cat /etc/hostname 
@@ -25,75 +30,76 @@ hostname -s
 hostname -f
 hostname -A
 hostname -i
-getent ahosts mail.artgaw.pl
-ping -c4 artgaw.pl
-ping -c4 mail.artgaw.pl
+getent ahosts mail.sp9ag.pl
+ping -c4 sp9ag.pl
+ping -c4 mail.sp9ag.pl
 ```
 
 ## install the software
+
 Example covers `Debian 10`
+
 ```bash
 apt -y update
 apt -y upgrade
 apt -y install vim curl wget netcat net-tools bash-completion lsof certbot
 apt -y install mailutils
 apt -y install postfix
-apt -y install dovecot-core dovecot-imapd
+apt -y install dovecot-core dovecot-common dovecot-imapd dovecot-pop3d
 ```
 
 ## setup the postfix
+
 ```bash
 mv  /etc/postfix/main.cf /etc/postfix/main.cf.bkp
 cat <<EOT > /etc/postfix/main.cf
-# See /usr/share/postfix/main.cf.dist for a commented, more complete version
-smtpd_banner = $myhostname ESMTP $mail_name
-biff = no
-
-# appending .domain is the MUA's job.
-append_dot_mydomain = no
-readme_directory = no
-
-# See http://www.postfix.org/COMPATIBILITY_README.html -- default to 2 on fresh installs.
-compatibility_level = 2
-
-# TLS parameters
-smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-smtpd_use_tls=yes
+alias_database                   = hash:/etc/aliases
+alias_maps                       = hash:/etc/aliases
+append_dot_mydomain              = no
+biff                             = no
+broken_sasl_auth_clients         = yes
+compatibility_level              = 2
+disable_vrfy_command             = yes
+home_mailbox                     = Maildir/
+inet_interfaces                  = all
+inet_protocols                   = ipv4
+mailbox_size_limit               = 0
+mydestination                    = mail.sp9ag.pl, sp9ag.pl, localhost.sp9ag.pl, localhost
+mydomain                         = sp9ag.pl
+myhostname                       = mail.sp9ag.pl
+mynetworks                       = 127.0.0.0/8, 192.168.43.0/24
+myorigin                         = sp9ag.pl
+readme_directory                 = no
+recipient_delimiter              = +
+relayhost                        = 
+smtp_tls_note_starttls_offer     = yes
+smtp_tls_security_level          = may
+smtp_tls_session_cache_database  = btree:${data_directory}/smtp_scache
+smtpd_banner                     = mail.sp9ag.pl ESMTP
+smtpd_delay_reject               = yes
+smtpd_helo_required              = yes
+smtpd_helo_restrictions          = reject_non_fqdn_helo_hostname,reject_invalid_helo_hostname,reject_unknown_helo_hostname
+smtpd_recipient_restrictions     = permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination,reject_invalid_hostname,reject_non_fqdn_hostname,reject_non_fqdn_sender,reject_non_fqdn_recipient,reject_unknown_sender_domain,reject_rbl_client sbl.spamhaus.org,reject_rbl_client cbl.abuseat.org
+smtpd_relay_restrictions         = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
+smtpd_sasl_auth_enable           = yes
+smtpd_sasl_local_domain          =
+smtpd_sasl_path                  = private/auth
+smtpd_sasl_security_options      = noanonymous
+smtpd_sasl_type                  = dovecot
+smtpd_tls_cert_file              = /etc/letsencrypt/live/mail.sp9ag.pl/fullchain.pem
+smtpd_tls_key_file               = /etc/letsencrypt/live/mail.sp9ag.pl/privkey.pem
+smtpd_tls_loglevel               = 1
+smtpd_tls_received_header        = yes
+smtpd_tls_security_level         = may
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
-smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-
-# See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
-# information on enabling SSL in the smtp client.
-
-smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-myhostname = mail.artgaw.pl
-mydomain = artgaw.pl
-alias_maps = hash:/etc/aliases
-alias_database = hash:/etc/aliases
-myorigin = artgaw.pl
-mydestination = mail.artgaw.pl, artgaw.pl, localhost.artgaw.pl, localhost
-relayhost = 
-mynetworks = 127.0.0.0/8, 192.168.43.0/24
-mailbox_size_limit = 0
-recipient_delimiter = +
-inet_interfaces = all
-inet_protocols = ipv4
-home_mailbox = Maildir/
-
-# SMTP-Auth settings
-smtpd_sasl_type = dovecot
-smtpd_sasl_path = private/auth
-smtpd_sasl_auth_enable = yes
-smtpd_sasl_security_options = noanonymous
-smtpd_sasl_local_domain = $myhostname
-smtpd_recipient_restrictions = permit_mynetworks,permit_auth_destination,permit_sasl_authenticated,reject
+smtpd_use_tls                    = yes
 EOT
 
 echo "export MAIL=$HOME/Maildir" >> /etc/profile
 ```
 
 ## verify the configuration, restart postfix and check if it is listening on port 25
+
 ```bash
 postconf -n
 systemctl restart postfix
@@ -101,61 +107,106 @@ systemctl status postfix
 netstat -ntdupa
 ```
 
-## configure dovecot 
+## configure dovecot
+
 ```bash
 cp /etc/dovecot/dovecot.conf          /etc/dovecot/dovecot.conf.bkp
 cp /etc/dovecot/conf.d/10-auth.conf   /etc/dovecot/conf.d/10-auth.conf.bkp
 cp /etc/dovecot/conf.d/10-mail.conf   /etc/dovecot/conf.d/10-mail.conf.bkp
 cp /etc/dovecot/conf.d/10-master.conf /etc/dovecot/conf.d/10-master.conf.bkp
+cp /etc/dovecot/conf.d/10-ssl.conf    /etc/dovecot/conf.d/10-ssl.conf.bkp
 
 # listen = *, ::
 vim /etc/dovecot/dovecot.conf
 
-# disable_plaintext_auth = no
+# disable_plaintext_auth = yes
 # auth_mechanisms = plain login
 vim /etc/dovecot/conf.d/10-auth.conf
 
 # mail_location = maildir:~/Maildir
 vim /etc/dovecot/conf.d/10-mail.conf
 
-# unix_listener /var/spool/postfix/private/auth {
-#   mode = 0666
-#   user = postfix
-#   group = postfix
+# service imap-login {
+#    inet_listener imap {
+#       port = 143
+#    }
+# ...
+# }
+# service pop3-login {
+#    inet_listener pop3 {
+#       port = 110
+#    }
+#    ...
+# }
+# ...
+# service auth {
+# ...
+#    # Postfix smtp-auth
+#    unix_listener /var/spool/postfix/private/auth {
+#       mode = 0660
+#       user = postfix
+#       group = postfix
 # }
 vim /etc/dovecot/conf.d/10-master.conf
+
+# # SSL/TLS support: yes, no, required. <doc/wiki/SSL.txt>
+# ssl = required
+# ...
+# ssl_cert = </etc/letsencrypt/live/mail.sp9ag.pl>/fullchain.pem
+# ssl_key = </etc/letsencrypt/live/mail.sp9ag.pl>/privkey.pem
+# ...
+# # SSL protocols to use
+# ssl_protocols = !SSLv2 !SSLv3
+vim /etc/dovecot/conf.d/10-ssl.conf
 ```
 
-## verify the configuration, restart dovecot and chgeck if it is listening on port 143
+## verify the configuration, restart dovecot and check if it is listening on port 143 and 110
+
 ```bash
+dovecot -n
 systemctl restart dovecot
 systemctl status dovecot
 netstat -ntdupa
 ```
 
-## try to create new user and send mail to him
-### create the user
+## create a bunch of new users and send mail to at least one of them
+
+### create the users
+
 ```bash
-adduser qqryq
+useradd -m admin
+useradd -m biuro
+useradd -m laser
+useradd -m polev
+useradd -m procopy
+useradd -m procopych
+useradd -m skaner
+
+passwd     admin
+passwd     biuro
+passwd     laser
+passwd     polev
+passwd     procopy
+passwd     procopych
+passwd     skaner
 ```
 
 ### send mail using `mail` tool
+
 ```bash
 mkdir -p ~/Maildir/new/
-echo "test body" | mail -s "test mail" qqryq
+echo "test body" | mail -s "test mail" admin
 mailq
 mail
-ls  ~/Maildir/
-ls  ~/Maildir/new/
-cat ~/Maildir/new/*
 ```
 
 ### send mail using `netcat`
+
 ```bash
 nc localhost 25
 # ehlo localhost
 # mail from: root
-# rcpt to: qqryq
+# rcpt to: admin
 # data
 # subject: test
 # Mail body
@@ -163,16 +214,21 @@ nc localhost 25
 # quit
 ```
 
-## verifie delivery
+## verify delivery
+
 ### the basic way
+
 ```bash
-ls /home/qqryq/Maildir/new/
+ls  /home/admin/Maildir/
+ls  /home/admin/Maildir/new/
+cat /home/admin/Maildir/new/*
 ```
 
 ### the IMAP way
+
 ```bash
 nc localhost 143
-x1 LOGIN qqryq dupa1
+x1 LOGIN admin relevant_password
 x2 LIST "" "*"
 x3 SELECT Inbox
 x4 LOGOUT
