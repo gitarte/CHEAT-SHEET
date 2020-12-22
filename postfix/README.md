@@ -1,19 +1,22 @@
 # DIY MAIL SERVER
 Installing and configureing basic mailserver based on `postfix` and `dovecot`
 
-## make DNS resolution to read the hosts file first
+## setup DNS
+The example domain is `artgaw.pl` and mail server has IP `192.168.43.200`
+
+### make DNS resolution to read the hosts file first
 ```bash
 echo "order hosts,bind" | cat - /etc/host.conf > temp && mv temp /etc/host.conf
 ```
 
-## setup FQDN
+### setup FQDN
 ```bash
 hostnamectl set-hostname mail.artgaw.pl
 echo "192.168.43.200 artgaw.pl mail.artgaw.pl" >> /etc/hosts
 systemctl reboot 
 ```
 
-## ensure the resutls after reboot 
+### ensure the resutls after reboot 
 ```bash
 cat /etc/host.conf
 cat /etc/hostname 
@@ -28,6 +31,7 @@ ping -c4 mail.artgaw.pl
 ```
 
 ## install the software
+Example covers `Debian 10`
 ```bash
 apt -y update
 apt -y upgrade
@@ -89,23 +93,12 @@ EOT
 echo "export MAIL=$HOME/Maildir" >> /etc/profile
 ```
 
-## verify the configuration, restart postfix and chgeck if it is listening on port 25
+## verify the configuration, restart postfix and check if it is listening on port 25
 ```bash
 postconf -n
 systemctl restart postfix
 systemctl status postfix
 netstat -ntdupa
-```
-
-## send local email to yourself
-```bash
-mkdir -p ~/Maildir/new/
-echo "test body" | mail -s "test mail" root
-mailq
-mail
-ls  ~/Maildir/
-ls  ~/Maildir/new/
-cat ~/Maildir/new/*
 ```
 
 ## configure dovecot 
@@ -114,6 +107,7 @@ cp /etc/dovecot/dovecot.conf          /etc/dovecot/dovecot.conf.bkp
 cp /etc/dovecot/conf.d/10-auth.conf   /etc/dovecot/conf.d/10-auth.conf.bkp
 cp /etc/dovecot/conf.d/10-mail.conf   /etc/dovecot/conf.d/10-mail.conf.bkp
 cp /etc/dovecot/conf.d/10-master.conf /etc/dovecot/conf.d/10-master.conf.bkp
+
 # listen = *, ::
 vim /etc/dovecot/dovecot.conf
 
@@ -140,10 +134,25 @@ netstat -ntdupa
 ```
 
 ## try to create new user and send mail to him
+### create the user
 ```bash
 adduser qqryq
-nc localhost 25
+```
 
+### send mail using `mail` tool
+```bash
+mkdir -p ~/Maildir/new/
+echo "test body" | mail -s "test mail" qqryq
+mailq
+mail
+ls  ~/Maildir/
+ls  ~/Maildir/new/
+cat ~/Maildir/new/*
+```
+
+### send mail using `netcat`
+```bash
+nc localhost 25
 # ehlo localhost
 # mail from: root
 # rcpt to: qqryq
@@ -152,11 +161,15 @@ nc localhost 25
 # Mail body
 # .
 # quit
+```
 
+## verifie delivery
+### thoe basic way
+```bash
 ls /home/qqryq/Maildir/new/
 ```
 
-## login as the user ti IMAP
+### the IMAP way
 ```bash
 nc localhost 143
 x1 LOGIN qqryq dupa1
