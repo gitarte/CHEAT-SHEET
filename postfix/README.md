@@ -40,18 +40,42 @@ ping -c4 mail.sp9ag.pl
 Example covers `Debian 10`
 
 ```bash
-apt -y update
-apt -y upgrade
-apt -y install vim curl wget netcat net-tools bash-completion lsof certbot
-apt -y install mailutils
-apt -y install postfix
-apt -y install dovecot-core dovecot-common dovecot-imapd dovecot-pop3d
+   apt -y update \
+&& apt -y upgrade \
+&& apt -y install libsasl2-dev libsasl2-modules \
+&& apt -y install vim curl wget netcat net-tools bash-completion lsof certbot mailutils \
+&& apt -y install postfix \
+&& apt -y install dovecot-core dovecot-common dovecot-imapd dovecot-pop3d \
+&& apt -y autoremove \
+&& apt -y autoclean \
+&& apt -y clean \
+&& echo "======= OK ======="
+```
+
+## obtain the cert's from `let's encrypt`
+
+```bash
+certbot certonly --standalone -d mail.sp9ag.pl
 ```
 
 ## setup the postfix
 
 ```bash
-mv  /etc/postfix/main.cf /etc/postfix/main.cf.bkp
+mv  /etc/postfix/main.cf   /etc/postfix/main.cf.bkp
+mv  /etc/postfix/master.cf /etc/postfix/master.cf.bkp
+
+# submission inet n - - - - smtpd
+#   -o syslog_name=postfix/submission
+#   -o smtpd_tls_security_level=encrypt
+#   -o smtpd_sasl_auth_enable=yes
+#   -o smtpd_client_restrictions=permit_sasl_authenticated,reject
+# smtps inet n - - - - smtpd
+#   -o syslog_name=postfix/smtps
+#   -o smtpd_tls_wrappermode=yes
+#   -o smtpd_sasl_auth_enable=yes
+#   -o smtpd_client_restrictions=permit_sasl_authenticated,reject
+vim /etc/postfix/master.cf
+
 cat <<EOT > /etc/postfix/main.cf
 alias_database                   = hash:/etc/aliases
 alias_maps                       = hash:/etc/aliases
@@ -127,16 +151,24 @@ vim /etc/dovecot/conf.d/10-auth.conf
 vim /etc/dovecot/conf.d/10-mail.conf
 
 # service imap-login {
-#    inet_listener imap {
-#       port = 143
-#    }
+# ...
+#  inet_listener imap {
+#    port = 143
+#  }
+#  inet_listener imaps {
+#    port = 993
+#    ssl = yes
+#  }
 # ...
 # }
 # service pop3-login {
-#    inet_listener pop3 {
-#       port = 110
-#    }
-#    ...
+#   inet_listener pop3 {
+#     port = 110
+#   }
+#   inet_listener pop3s {
+#     port = 995
+#     ssl = yes
+#   }
 # }
 # ...
 # service auth {
@@ -149,13 +181,9 @@ vim /etc/dovecot/conf.d/10-mail.conf
 # }
 vim /etc/dovecot/conf.d/10-master.conf
 
-# # SSL/TLS support: yes, no, required. <doc/wiki/SSL.txt>
 # ssl = required
-# ...
 # ssl_cert = </etc/letsencrypt/live/mail.sp9ag.pl/fullchain.pem
 # ssl_key = </etc/letsencrypt/live/mail.sp9ag.pl/privkey.pem
-# ...
-# # SSL protocols to use
 # ssl_protocols = !SSLv2 !SSLv3
 vim /etc/dovecot/conf.d/10-ssl.conf
 ```
@@ -189,6 +217,8 @@ passwd     polev
 passwd     procopy
 passwd     procopych
 passwd     skaner
+
+newaliases
 ```
 
 ### send mail using `mail` tool
