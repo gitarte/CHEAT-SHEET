@@ -6,7 +6,7 @@ https://nodejs.org/en/download/
 ## Install Non-Sucking Service Manager
 https://nssm.cc/download
 
-##Create the application 
+## Create the application 
 ```bash
 # Powershell
 mkdir C:\myapp
@@ -46,7 +46,7 @@ nssm.exe start   myapp
 
 ## Verify
 ```bash
-# Powershell (yes Win10 coms with curl preinstalled
+# Powershell (yes Win10 comes with curl preinstalled)
 curl.exe http://localhost:3000/
 services.msc
 ```
