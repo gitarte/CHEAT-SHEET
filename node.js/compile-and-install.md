@@ -1,8 +1,9 @@
 # COMPILE AND INSTALL Node.js 
 ### DEBIAN 8.x
 ```sh
-$ apt-get -y install build-essential 
-$ apt-get -y install linux-headers-`uname -r`
+$ apt -y install build-essential 
+$ apt -y install linux-headers-`uname -r`
+$ apt -y install python3-distutils
 $ # The rest is pretty much the same as for CentOS
 ```
 ### CENTOS 7.x
