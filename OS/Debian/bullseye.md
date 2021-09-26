@@ -6,7 +6,7 @@ dpkg --add-architecture i386 \
   && apt -y upgrade \
   && apt -y install build-essential dkms cmake cmake-qt-gui tcl scons \
   && apt -y install linux-headers-`uname -r` net-tools \
-  && apt -y install libappindicator3-0.1-cil libappindicator3-0.1-cil-dev \
+  && apt -y install libappindicator3-0.1-cil libappindicator3-0.1-cil-dev libqt5opengl5 libqt5printsupport5 \
   && apt -y install openssl libssl-dev pkg-config \
   && apt -y install python3-pip \
   && apt -y install git apt-transport-https curl vim \
