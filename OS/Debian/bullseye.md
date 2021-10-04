@@ -27,8 +27,11 @@ dpkg --add-architecture i386 \
   && echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list \
   && apt update \
   && apt install brave-browser \
-  && echo 'source $VIMRUNTIME/defaults.vim' >> /home/asrtgaw/.vimrc
-  && echo 'set mouse-=a' >> /home/asrtgaw/.vimrc
+  && touch /home/artgaw/.vimrc \
+  && chown artgaw:artgaw /home/artgaw/.vimrc \
+  && echo 'source $VIMRUNTIME/defaults.vim' >> /home/artgaw/.vimrc \
+  && echo 'set mouse-=a' >> /home/artgaw/.vimrc \
   && apt -y autoremove && apt -y clean && apt -y autoclean \
   && echo "ALL DONE"
 ```
+
