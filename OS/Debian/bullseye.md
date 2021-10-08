@@ -17,12 +17,8 @@ dpkg --add-architecture i386 \
   && apt -y install ttf-mscorefonts-installer rar unrar libavcodec-extra gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-vaapi \
   && apt -y install gnome-shell-extension-dashtodock gnome-shell-extension-top-icons-plus gnome-shell-extension-desktop-icons \
   && apt -y install firmware-linux firmware-linux-nonfree intel-microcode printer-driver-* firmware-iwlwifi && modprobe iwlwifi \
-  && curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add - \
-  && echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list \
-  && apt update \
-  && apt -y install brave-browser \
-  && apt -y install chirp \
-  && addgroup "artgaw" dialout \
+  && apt -y install chirp && usermod -aG dialout artgaw \
+  && apt -y install sudo  && usermod -aG sudo    artgaw \
   && curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg \
   && echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list \
   && apt update \
@@ -34,4 +30,3 @@ dpkg --add-architecture i386 \
   && apt -y autoremove && apt -y clean && apt -y autoclean \
   && echo "ALL DONE"
 ```
-
