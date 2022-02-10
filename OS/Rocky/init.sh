@@ -31,4 +31,5 @@ ip_resolve=4
 && sudo dnf -y check-update \
 && sudo dnf -y install code \
 && sudo dnf -y install gparted \
+&& sudo dnf install snapd && sudo systemctl enable snapd && sudo systemctl start snapd && sudo snap install discord opera btave \
 && echo "all done"
