@@ -34,5 +34,6 @@ ip_resolve=4
 && sudo dnf install snapd && sudo systemctl enable snapd && sudo systemctl start snapd && sudo snap install discord opera \
 && sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/ \
 && sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc \
-&& sudo dnf install brave-browser \
+&& sudo dnf -y install brave-browser \
+&& sudo dnf -y install qemu-kvm qemu-img libvirt virt-manager virt-install virt-viewer libvirt-client && sudo systemctl start libvirtd &&  sudo systemctl enable libvirtd \
 && echo "all done"
