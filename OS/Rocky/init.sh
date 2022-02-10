@@ -31,5 +31,8 @@ ip_resolve=4
 && sudo dnf -y check-update \
 && sudo dnf -y install code \
 && sudo dnf -y install gparted \
-&& sudo dnf install snapd && sudo systemctl enable snapd && sudo systemctl start snapd && sudo snap install discord opera btave \
+&& sudo dnf install snapd && sudo systemctl enable snapd && sudo systemctl start snapd && sudo snap install discord opera \
+&& sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/ \
+&& sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc \
+&& sudo dnf install brave-browser \
 && echo "all done"
