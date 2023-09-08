@@ -11,8 +11,8 @@ ip_resolve=4
 && sudo dnf -y install dnf-plugins-core \
 && sudo dnf -y config-manager --set-enabled powertools \
 && sudo dnf -y install epel-release \
-&& sudo dnf -y install --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm \
-&& sudo dnf -y install --nogpgcheck https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-8.noarch.rpm \
+&& sudo dnf -y install --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm \
+&& sudo dnf -y install --nogpgcheck https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm \
 && sudo dnf -y upgrade --refresh \
 && sudo dnf -y check \
 && sudo dnf -y autoremove \
