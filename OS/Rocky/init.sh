@@ -26,7 +26,6 @@ echo "START" \
 && sudo dnf -y install tlp tlp-rdw && sudo systemctl enable tlp \
 && sudo dnf -y install vim vlc gimp gnome-tweaks unzip p7zip p7zip-plugins unrar vlc mplayer audacity gparted \
 && sudo dnf -y install kernel-devel.x86_64 qt5-qttools-devel.x86_64 qt5-qttools-libs-help.x86_64 libvpx.x86_64 \
-&& sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo \
-&& sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc \
-&& sudo dnf -y install brave-browser \
+&& sudo dnf -y install podman \
+&& curl -fsS https://dl.brave.com/install.sh | sh \
 && echo "all done"
